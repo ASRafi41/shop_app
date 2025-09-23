@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/home_page.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app/pages/home_page.dart';
+
+import 'providers/cart_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,44 +13,48 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Shopping App',
-      theme: ThemeData(
-        fontFamily: 'Lato',
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.purpleAccent,
-          primary: Colors.purpleAccent,
-        ),
-        appBarTheme: const AppBarTheme(
-            titleTextStyle: TextStyle(
-          fontSize: 20,
-          color: Colors.black,
-        )),
-        inputDecorationTheme: const InputDecorationTheme(
-          hintStyle: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
+
+    return ChangeNotifierProvider(
+      create: (context) => CartProvider(),
+      child: MaterialApp(
+        title: 'Shopping App',
+        theme: ThemeData(
+          fontFamily: 'Lato',
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.purpleAccent,
+            primary: Colors.purpleAccent,
           ),
-          prefixIconColor: Color.fromRGBO(199, 199, 199, 1),
-        ),
-        textTheme: const TextTheme(
-          titleLarge: TextStyle(
-            fontSize: 35,
-            fontWeight: FontWeight.bold,
-          ),
-          titleMedium: TextStyle(
-            fontWeight: FontWeight.bold,
+          appBarTheme: const AppBarTheme(
+              titleTextStyle: TextStyle(
             fontSize: 20,
+            color: Colors.black,
+          )),
+          inputDecorationTheme: const InputDecorationTheme(
+            hintStyle: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+            prefixIconColor: Color.fromRGBO(199, 199, 199, 1),
           ),
-          bodySmall: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
+          textTheme: const TextTheme(
+            titleLarge: TextStyle(
+              fontSize: 35,
+              fontWeight: FontWeight.bold,
+            ),
+            titleMedium: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+            bodySmall: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
           ),
+          useMaterial3: true,
         ),
-        useMaterial3: true,
+        home: const HomePage(),
+        debugShowCheckedModeBanner: false,
       ),
-      home: const HomePage(),
-      debugShowCheckedModeBanner: false,
     );
   }
 }
